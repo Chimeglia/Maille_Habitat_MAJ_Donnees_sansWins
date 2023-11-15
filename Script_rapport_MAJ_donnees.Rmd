@@ -14,7 +14,7 @@ output:
 knit: (function(inputFile, encoding) { 
   rmarkdown::render(inputFile,
                     encoding=encoding, 
-                    output_file='Rapport_Etude_Maille_Habitat_MAJ_Données.html') })
+                    output_file='Rapport_Etude_Maille_Habitat_MAJ_Donnees.html') })
 ---
 
 ```{r setup, include=FALSE}
