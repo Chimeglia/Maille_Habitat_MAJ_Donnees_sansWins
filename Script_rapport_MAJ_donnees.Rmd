@@ -773,11 +773,11 @@ webshot("Cartes_Interactives/carte_interactive_13.html", file = "Cartes_Interact
 
 <br>
 
-## &nbsp;Sans l'indicateur "nombre de logements"
+## &nbsp; Sans l'indicateur "nombre de logements"
 
 <br>
 
-### &nbsp;&nbsp;Mêmes données mises à jour
+### &nbsp;&nbsp; Mêmes données mises à jour
 
 ```{r , include=FALSE, eval=F}
 rm(list=ls())
