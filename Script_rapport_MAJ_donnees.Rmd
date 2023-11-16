@@ -21,6 +21,37 @@ knit: (function(inputFile, encoding) {
 knitr::opts_chunk$set(echo = TRUE, message=F,warning=F)
 ```
 
+```{css, echo=F, eval=T}
+<style>
+  div.content h1 {
+    margin-left: 20px;
+  }
+
+  div.content h2 {
+    margin-left: 40px;
+  }
+
+  div.content h3 {
+    margin-left: 60px;
+  }
+
+  div.content h4 {
+    margin-left: 80px;
+  }
+
+  div.content h5 {
+    margin-left: 100px;
+  }
+
+  div.content h6 {
+    margin-left: 120px;
+  }
+</style>
+
+```
+
+<div class="content">
+
 ```{r, echo=F, message=F, warning=F}
 rm(list=ls())
 
@@ -773,11 +804,11 @@ webshot("Cartes_Interactives/carte_interactive_13.html", file = "Cartes_Interact
 
 <br>
 
-## &nbsp; Sans l'indicateur "nombre de logements"
+## 1) Sans l'indicateur "nombre de logements"
 
 <br>
 
-### &nbsp;&nbsp; Mêmes données mises à jour
+###  1.1) Mêmes données mises à jour
 
 ```{r , include=FALSE, eval=F}
 rm(list=ls())
@@ -867,8 +898,7 @@ carteCommunesCorses_sf <- st_as_sf(carteCommunesCorses_merged)
 
 # Création d'une palette de couleurs pour les secteurs
 palSecteurs = colorFactor(palette = c("seagreen3", "orange2","blueviolet", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
-palSecteurs = colorFactor(palette = c("deeppink", "blueviolet","seagreen3", "orange2"), domain = carteMaillesSecteurs$cl_maille4)
-
+palSecteurs = colorFactor(palette = c("seagreen3", "deeppink","blueviolet", "orange2"), domain = carteMaillesSecteurs$cl_maille4)
 
 
 # Création d'une carte des communes avec un trait gris fin
@@ -899,7 +929,7 @@ webshot("Cartes_Interactives/carte_interactive_MAJ1.html", file = "Cartes_Intera
 <br>
 <br>
 
-### &nbsp;&nbsp; Ajout du "revenu total Airbnb" + MAJ données 
+###  1.2) Ajout du "revenu total Airbnb" + MAJ données 
 
 ```{r , include=FALSE, eval=F}
 rm(list=ls())
@@ -991,8 +1021,7 @@ carteCommunesCorses_sf <- st_as_sf(carteCommunesCorses_merged)
 
 # Création d'une palette de couleurs pour les secteurs
 palSecteurs = colorFactor(palette = c("seagreen3", "orange2","blueviolet", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
-palSecteurs = colorFactor(palette = c("deeppink", "blueviolet","seagreen3", "orange2"), domain = carteMaillesSecteurs$cl_maille4)
-
+palSecteurs = colorFactor(palette = c("deeppink", "seagreen3","blueviolet", "orange2"), domain = carteMaillesSecteurs$cl_maille4)
 
 
 # Création d'une carte des communes avec un trait gris fin
@@ -1023,7 +1052,7 @@ webshot("Cartes_Interactives/carte_interactive_MAJ2.html", file = "Cartes_Intera
 <br>
 <br>
 
-### &nbsp;&nbsp; Ajout du "revenu moyen / logement Airbnb" + MAJ données 
+###  1.3) Ajout du "revenu moyen / logement Airbnb" + MAJ données 
 
 ```{r , include=FALSE, eval=F}
 rm(list=ls())
@@ -1115,8 +1144,7 @@ carteCommunesCorses_sf <- st_as_sf(carteCommunesCorses_merged)
 
 # Création d'une palette de couleurs pour les secteurs
 palSecteurs = colorFactor(palette = c("seagreen3", "orange2","blueviolet", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
-palSecteurs = colorFactor(palette = c("deeppink", "blueviolet","orange2", "seagreen3"), domain = carteMaillesSecteurs$cl_maille4)
-
+palSecteurs = colorFactor(palette = c("seagreen3", "blueviolet","orange2", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
 
 
 # Création d'une carte des communes avec un trait gris fin
@@ -1148,9 +1176,11 @@ webshot("Cartes_Interactives/carte_interactive_MAJ3.html", file = "Cartes_Intera
 <br> 
 <br>
  
-## &nbsp; Avec l'ajout de l'indicateur "nombre de logements"
+##  2) Avec l'ajout de l'indicateur "nombre de logements"
 
-### &nbsp;&nbsp; Ajout du "nombre de logements"
+<br>
+
+### 2.1) Ajout du "nombre de logements"
 
 ```{r , include=FALSE, eval=F}
 rm(list=ls())
@@ -1274,7 +1304,7 @@ webshot("Cartes_Interactives/carte_interactive_MAJ1b.html", file = "Cartes_Inter
 <br>
 <br>
 
-### &nbsp;&nbsp; Ajout du "revenu total Airbnb" + "nombre de logements" + MAJ données 
+### 2.2) Ajout du "revenu total Airbnb" + "nombre de logements" + MAJ données 
 
 ```{r , include=FALSE, eval=F}
 rm(list=ls())
@@ -1368,8 +1398,7 @@ carteCommunesCorses_sf <- st_as_sf(carteCommunesCorses_merged)
 
 # Création d'une palette de couleurs pour les secteurs
 palSecteurs = colorFactor(palette = c("seagreen3", "orange2","blueviolet", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
-palSecteurs = colorFactor(palette = c("deeppink", "blueviolet","seagreen3", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
-
+palSecteurs = colorFactor(palette = c("deeppink", "seagreen3","blueviolet", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
 
 
 # Création d'une carte des communes avec un trait gris fin
@@ -1400,7 +1429,7 @@ webshot("Cartes_Interactives/carte_interactive_MAJ2b.html", file = "Cartes_Inter
 <br>
 <br>
 
-### &nbsp;&nbsp; Ajout du "revenu moyen / logement Airbnb" + "nombre de logements" + MAJ données 
+### 2.3) Ajout du "revenu moyen / logement Airbnb" + "nombre de logements" + MAJ données 
 
 ```{r , include=FALSE, eval=F}
 rm(list=ls())
@@ -1494,7 +1523,7 @@ carteCommunesCorses_sf <- st_as_sf(carteCommunesCorses_merged)
 
 # Création d'une palette de couleurs pour les secteurs
 palSecteurs = colorFactor(palette = c("seagreen3", "orange2","blueviolet", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
-palSecteurs = colorFactor(palette = c("blueviolet", "deeppink","seagreen3", "orange2"), domain = carteMaillesSecteurs$cl_maille4)
+palSecteurs = colorFactor(palette = c("deeppink", "blueviolet","seagreen3", "orange2"), domain = carteMaillesSecteurs$cl_maille4)
 
 
 
@@ -1678,10 +1707,6 @@ webshot("Cartes_Interactives/carte_interactive_INI.html", file = "Cartes_Interac
 
 
 
-
-
-
-
 <!-- 
 Script pour mettre à jour les données 
 -->
@@ -1697,10 +1722,14 @@ ImportFILOCOM_cube1=read.csv("Données/cube1_2019.csv",sep=";")
 ImportFILOCOM_cube2=read.csv("Données/cube2_2019.csv",sep=";")
 ImportFILOCOM_cube3=read.csv("Données/cube3_2019.csv",sep=";")
 ImportFILOCOM_cube4a=read.csv("Données/cube4a_2019.csv",sep=";")
+ImportFILOCOM_cube4b=read.csv("Données/cube4b_2019.csv",sep=";")
 colnames(ImportFILOCOM_cube1)[2]="CODGEO"
 colnames(ImportFILOCOM_cube2)[2]="CODGEO"
 colnames(ImportFILOCOM_cube3)[2]="CODGEO"
 colnames(ImportFILOCOM_cube4a)[2]="CODGEO"
+colnames(ImportFILOCOM_cube4b)[2]="CODGEO"
+Import_DV3F=read.csv("Données/dv3fep_0723_lgmt_app_com_1821.csv",sep=";")
+colnames(Import_DV3F)[2]="CODGEO"
 
 
 Donnees_Cube1 = Donnees_Logement_2017 %>% 
@@ -1715,7 +1744,7 @@ Donnees_Cube1=Donnees_Cube1 %>%
               mutate(anc = ifelse(is.na(anc), `Avant 1946`, anc), 
                    jeun = ifelse(is.na(jeun), `Après 70`, jeun),
                    tot_lgmt=ifelse(is.na(Parc_total), tot_lgmt, Parc_total))
-Donnees_Cube1=Donnees_Cube1 %>% select(CODGEO,LIBGEO,tot_lgmt,jeun,anc,nb_mut,moyenne_prix,rev_ucm,RP_Filocom=RP.y)
+Donnees_Cube1=Donnees_Cube1 %>% select(CODGEO,LIBGEO,tot_lgmt,jeun,anc, RP_Filocom=RP.y)
 
 
 
@@ -1757,12 +1786,17 @@ Donnees_INSEE=baseLogementINSEE_Corse_2019 %>%
               left_join(basePopulationINSEE_Corse_2019, by="CODGEO") %>% 
               select(CODGEO,POP=P19_POP,LOG=P19_LOG, RP=P19_RP, RSECOCC=P19_RSECOCC, LOGVAC=P19_LOGVAC,RP_PROP=P19_RP_PROP)
 
+Donnees_DV3F= Import_DV3F %>% select(CODGEO, nb_mut=lgmt.nb_mut, moyenne_prix=lgmt.moy_prix_frais)
+
+Donnees_rev_ucm = ImportFILOCOM_cube4b %>% select(CODGEO, rev_ucm=Total_menages_rev_brut_ucm_mediane)
 
 Donnees_Logement_MAJ=Donnees_Cube1 %>% 
+  left_join(Donnees_DV3F,by="CODGEO")  %>% 
   left_join(Donnees_INSEE,by="CODGEO")  %>% 
   left_join(Donnees_proprietaire,by="CODGEO") %>% 
   left_join(Donnees_social,by="CODGEO") %>% 
   left_join(Donnees_duroc,by="CODGEO") %>% 
+  left_join(Donnees_rev_ucm,by="CODGEO") %>% 
   left_join(Donnees_AirDNA,by="CODGEO")
 
 
@@ -1773,7 +1807,7 @@ save(Donnees_Logement_MAJ,file="Données/Donnees_Logement_MAJ.Rdata")
 ```
 
 
-
+</div>
 
 
 
