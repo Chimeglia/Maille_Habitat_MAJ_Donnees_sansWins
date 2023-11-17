@@ -207,7 +207,7 @@ Les précédents indicateurs sont mis à jour avec des données plus récentes e
 
 <br>
 <strong>
-Nombre de transactions rapporté au nombre de logements <span style="color:red">(Source : DV3F 2018 - 2021)</span>  
+Nombre de transactions rapporté au nombre de logements (Source : DV3F 2018 - 2021) 
 </strong>
 
 <span style="color:green"><strong>
