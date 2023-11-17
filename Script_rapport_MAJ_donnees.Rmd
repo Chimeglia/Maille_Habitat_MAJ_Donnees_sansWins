@@ -99,7 +99,7 @@ Indicateurs_parCommune= Donnees_Logement %>%
          indic.lv = round(100 * LOGVAC / LOG, 1),
          indic.jeun = round(jeun / anc, 1),
          indic.social = round(100 * social / tot_lgmt, 1),
-         indic.prop = round(100 * proprietaire / RP_Filocom, 1),
+         indic.prop = round(100 * proprietaire / RP, 1),
          indic.duroc = duroc,
          indic.prix = round(100 * moyenne_prix/rev_ucm, 1),
          indic.airbnb.nb_lgmt=round(100*Loc.actives/LOG, 1),
@@ -131,7 +131,7 @@ Indicateurs_parCommune= Donnees_Logement %>%
          indic.lv = round(100 * LOGVAC / LOG, 1),
          indic.jeun = round(jeun / anc, 1),
          indic.social = round(100 * social / tot_lgmt, 1),
-         indic.prop = round(100 * proprietaire / RP_Filocom, 1),
+         indic.prop = round(100 * proprietaire / RP, 1),
          indic.duroc = duroc,
          indic.prix = round(100 * moyenne_prix/rev_ucm, 1),
          indic.airbnb.nb_lgmt=round(100*Loc.actives/LOG, 1),
@@ -207,11 +207,11 @@ Les précédents indicateurs sont mis à jour avec des données plus récentes e
 
 <br>
 <strong>
-Nombre de transactions rapporté au nombre de logements <span style="color:red">(Source : DV3F 2010-2017)</span>  
+Nombre de transactions rapporté au nombre de logements <span style="color:red">(Source : DV3F 2018 - 2021)</span>  
 </strong>
 
-<span style="color:red"><strong>
-Attention : Les données n'ont pas été mises à jour pour le moment.
+<span style="color:green"><strong>
+Données mises à jour (période 2018 - 2021)
 </strong>
 </span>
 
@@ -227,7 +227,8 @@ carte_indic = leaflet(carteCommunesCorses_indic_sf) %>%
   addPolygons(fillColor = ~palette(indic),
               fillOpacity = 0.8,
               color = "gray",
-              weight = 1)
+              weight = 1, popup = ~paste("<strong>Commune:</strong>", carteCommunesCorses_indic_sf$LIBGEO, "<br>",
+                   "<strong>Valeur:</strong>", carteCommunesCorses_indic_sf$indic))
 
 # carte_indic = carte_indic %>%
 #   addLegend(position = "topleft",
@@ -271,7 +272,8 @@ carte_indic = leaflet(carteCommunesCorses_indic_sf) %>%
   addPolygons(fillColor = ~palette(indic),
               fillOpacity = 0.8,
               color = "gray",
-              weight = 1)
+              weight = 1, popup = ~paste("<strong>Commune:</strong>", carteCommunesCorses_indic_sf$LIBGEO, "<br>",
+                   "<strong>Valeur:</strong>", carteCommunesCorses_indic_sf$indic))
 
 # carte_indic = carte_indic %>%
 #   addLegend(position = "topleft",
@@ -315,7 +317,8 @@ carte_indic = leaflet(carteCommunesCorses_indic_sf) %>%
   addPolygons(fillColor = ~palette(indic),
               fillOpacity = 0.8,
               color = "gray",
-              weight = 1)
+              weight = 1, popup = ~paste("<strong>Commune:</strong>", carteCommunesCorses_indic_sf$LIBGEO, "<br>",
+                   "<strong>Valeur:</strong>", carteCommunesCorses_indic_sf$indic))
 
 # carte_indic = carte_indic %>%
 #   addLegend(position = "topleft",
@@ -359,7 +362,8 @@ carte_indic = leaflet(carteCommunesCorses_indic_sf) %>%
   addPolygons(fillColor = ~palette(indic),
               fillOpacity = 0.8,
               color = "gray",
-              weight = 1)
+              weight = 1, popup = ~paste("<strong>Commune:</strong>", carteCommunesCorses_indic_sf$LIBGEO, "<br>",
+                   "<strong>Valeur:</strong>", carteCommunesCorses_indic_sf$indic))
 
 # carte_indic = carte_indic %>%
 #   addLegend(position = "topleft",
@@ -405,7 +409,8 @@ carte_indic = leaflet(carteCommunesCorses_indic_sf) %>%
   addPolygons(fillColor = ~palette(indic),
               fillOpacity = 0.8,
               color = "gray",
-              weight = 1)
+              weight = 1, popup = ~paste("<strong>Commune:</strong>", carteCommunesCorses_indic_sf$LIBGEO, "<br>",
+                   "<strong>Valeur:</strong>", carteCommunesCorses_indic_sf$indic))
 
 # carte_indic = carte_indic %>%
 #   addLegend(position = "topleft",
@@ -452,7 +457,8 @@ carte_indic = leaflet(carteCommunesCorses_indic_sf) %>%
   addPolygons(fillColor = ~palette(indic),
               fillOpacity = 0.8,
               color = "gray",
-              weight = 1)
+              weight = 1, popup = ~paste("<strong>Commune:</strong>", carteCommunesCorses_indic_sf$LIBGEO, "<br>",
+                   "<strong>Valeur:</strong>", carteCommunesCorses_indic_sf$indic))
 
 # carte_indic = carte_indic %>%
 #   addLegend(position = "topleft",
@@ -476,13 +482,14 @@ webshot("Cartes_Interactives/carte_interactive_6.html", file = "Cartes_Interacti
 
 <br>
 <strong>
-Taux de logements occupés par leur propriétaire (Source : FILOCOM) 
+Taux de logements occupés par leur propriétaire (Source : RP) 
 </strong>
 
 <span style="color:green"><strong>
-Données mises à jour (2019). 
-Attention : certaines valeurs trop faibles ont été secrétisées dans la base de données FILOCOM de 2019.  
-Ces données ont été remplacées par les données de l'étude initiale (2017).
+Données mises à jour (2019).
+Le précédent indicateur a été construit à partir de la base FILOCOM 2017. Cependant certaines valeurs semble erronées.
+D'autre part, dans la base FILOCOM 2019 certaines valeurs trop faibles ont été secrétisées.    
+Ainsi, il a été choisi de construire ce nouvel indicateur à partir du recensement de population INSEE de 2019. 
 </strong>
 </span>
 
@@ -506,8 +513,8 @@ carte_indic = leaflet(carteCommunesCorses_indic_sf) %>%
   addPolygons(fillColor = ~palette(indic),
               fillOpacity = 0.8,
               color = "gray",
-              weight = 1)
-
+              weight = 1, popup = ~paste("<strong>Commune:</strong>", carteCommunesCorses_indic_sf$LIBGEO, "<br>",
+                   "<strong>Valeur:</strong>", carteCommunesCorses_indic_sf$indic)) 
 # carte_indic = carte_indic %>%
 #   addLegend(position = "topleft",
 #             pal = palette_continue,
@@ -552,7 +559,8 @@ carte_indic = leaflet(carteCommunesCorses_indic_sf) %>%
   addPolygons(fillColor = ~palette(indic),
               fillOpacity = 0.8,
               color = "gray",
-              weight = 1)
+              weight = 1, popup = ~paste("<strong>Commune:</strong>", carteCommunesCorses_indic_sf$LIBGEO, "<br>",
+                   "<strong>Valeur:</strong>", carteCommunesCorses_indic_sf$indic))
 
 # carte_indic = carte_indic %>%
 #   addLegend(position = "topleft",
@@ -576,11 +584,12 @@ webshot("Cartes_Interactives/carte_interactive_8.html", file = "Cartes_Interacti
 
 <br>
 <strong>
-Prix du mètre carré dans l’ancien rapporté au revenu fiscal médian communal (Source : DV3F, FILOCOM)
+Prix du mètre carré rapporté au revenu fiscal médian communal (Source : DV3F, FILOCOM)
 </strong>
 
-<span style="color:red"><strong>
-Attention : Les données n'ont pas été mises à jour pour le moment.
+<span style="color:green"><strong>
+Données mises à jour (FILOCOM 2019 et DV3F 2018 - 2021).  
+Le précédent indicateur portait sur le prix au mètre carré dans l'ancien, la mise à jour intègre également le neuf.
 </strong>
 </span>
 
@@ -596,7 +605,8 @@ carte_indic = leaflet(carteCommunesCorses_indic_sf) %>%
   addPolygons(fillColor = ~palette(indic),
               fillOpacity = 0.8,
               color = "gray",
-              weight = 1)
+              weight = 1, popup = ~paste("<strong>Commune:</strong>", carteCommunesCorses_indic_sf$LIBGEO, "<br>",
+                   "<strong>Valeur:</strong>", carteCommunesCorses_indic_sf$indic))
 
 # carte_indic = carte_indic %>%
 #   addLegend(position = "topleft",
@@ -620,7 +630,7 @@ webshot("Cartes_Interactives/carte_interactive_9.html", file = "Cartes_Interacti
 
 <br>
 <strong>
-Taux de logements vacants (Source : INSEE, RP)
+Taux de locations touristiques de courte durée rapporté au parc de logements communal (Source : INSEE-RP, AirDNA)
 </strong>
 
 <span style="color:green"><strong>
@@ -640,7 +650,8 @@ carte_indic = leaflet(carteCommunesCorses_indic_sf) %>%
   addPolygons(fillColor = ~palette(indic),
               fillOpacity = 0.8,
               color = "gray",
-              weight = 1)
+              weight = 1, popup = ~paste("<strong>Commune:</strong>", carteCommunesCorses_indic_sf$LIBGEO, "<br>",
+                   "<strong>Valeur:</strong>", carteCommunesCorses_indic_sf$indic))
 
 # carte_indic = carte_indic %>%
 #   addLegend(position = "topleft",
@@ -686,7 +697,8 @@ carte_indic = leaflet(carteCommunesCorses_indic_sf) %>%
   addPolygons(fillColor = ~palette(indic),
               fillOpacity = 0.8,
               color = "gray",
-              weight = 1)
+              weight = 1, popup = ~paste("<strong>Commune:</strong>", carteCommunesCorses_indic_sf$LIBGEO, "<br>",
+                   "<strong>Valeur:</strong>", carteCommunesCorses_indic_sf$indic))
 
 # carte_indic = carte_indic %>%
 #   addLegend(position = "topleft",
@@ -731,7 +743,8 @@ carte_indic = leaflet(carteCommunesCorses_indic_sf) %>%
   addPolygons(fillColor = ~palette(indic),
               fillOpacity = 0.8,
               color = "gray",
-              weight = 1)
+              weight = 1, popup = ~paste("<strong>Commune:</strong>", carteCommunesCorses_indic_sf$LIBGEO, "<br>",
+                   "<strong>Valeur:</strong>", carteCommunesCorses_indic_sf$indic))
 
 # carte_indic = carte_indic %>%
 #   addLegend(position = "topleft",
@@ -776,7 +789,8 @@ carte_indic = leaflet(carteCommunesCorses_indic_sf) %>%
   addPolygons(fillColor = ~palette(indic),
               fillOpacity = 0.8,
               color = "gray",
-              weight = 1)
+              weight = 1, popup = ~paste("<strong>Commune:</strong>", carteCommunesCorses_indic_sf$LIBGEO, "<br>",
+                   "<strong>Valeur:</strong>", carteCommunesCorses_indic_sf$indic))
 
 # carte_indic = carte_indic %>%
 #   addLegend(position = "topleft",
@@ -832,7 +846,7 @@ Indicateurs_parCommune= Donnees_Logement %>%
          indic.lv = round(100 * LOGVAC / LOG, 1),
          indic.jeun = round(jeun / anc, 1),
          indic.social = round(100 * social / tot_lgmt, 1),
-         indic.prop = round(100 * proprietaire / RP_Filocom, 1),
+         indic.prop = round(100 * proprietaire / RP, 1),
          indic.duroc = duroc,
          indic.prix = round(100 * moyenne_prix/rev_ucm, 1),
          indic.airbnb.nb_lgmt=round(100*Loc.actives/LOG, 1)) %>% 
@@ -898,7 +912,8 @@ carteCommunesCorses_sf <- st_as_sf(carteCommunesCorses_merged)
 
 # Création d'une palette de couleurs pour les secteurs
 palSecteurs = colorFactor(palette = c("seagreen3", "orange2","blueviolet", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
-palSecteurs = colorFactor(palette = c("seagreen3", "deeppink","blueviolet", "orange2"), domain = carteMaillesSecteurs$cl_maille4)
+
+palSecteurs = colorFactor(palette = c("deeppink", "blueviolet","seagreen3", "orange2"), domain = carteMaillesSecteurs$cl_maille4)
 
 
 # Création d'une carte des communes avec un trait gris fin
@@ -953,7 +968,7 @@ Indicateurs_parCommune= Donnees_Logement %>%
          indic.lv = round(100 * LOGVAC / LOG, 1),
          indic.jeun = round(jeun / anc, 1),
          indic.social = round(100 * social / tot_lgmt, 1),
-         indic.prop = round(100 * proprietaire / RP_Filocom, 1),
+         indic.prop = round(100 * proprietaire / RP, 1),
          indic.duroc = duroc,
          indic.prix = round(100 * moyenne_prix/rev_ucm, 1),
          indic.airbnb.nb_lgmt=round(100*Loc.actives/LOG, 1),
@@ -1021,8 +1036,7 @@ carteCommunesCorses_sf <- st_as_sf(carteCommunesCorses_merged)
 
 # Création d'une palette de couleurs pour les secteurs
 palSecteurs = colorFactor(palette = c("seagreen3", "orange2","blueviolet", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
-palSecteurs = colorFactor(palette = c("deeppink", "seagreen3","blueviolet", "orange2"), domain = carteMaillesSecteurs$cl_maille4)
-
+palSecteurs = colorFactor(palette = c("deeppink", "blueviolet","seagreen3", "orange2"), domain = carteMaillesSecteurs$cl_maille4)
 
 # Création d'une carte des communes avec un trait gris fin
 carteCommunes = leaflet(carteCommunesCorses_sf) %>%
@@ -1076,7 +1090,7 @@ Indicateurs_parCommune= Donnees_Logement %>%
          indic.lv = round(100 * LOGVAC / LOG, 1),
          indic.jeun = round(jeun / anc, 1),
          indic.social = round(100 * social / tot_lgmt, 1),
-         indic.prop = round(100 * proprietaire / RP_Filocom, 1),
+         indic.prop = round(100 * proprietaire / RP, 1),
          indic.duroc = duroc,
          indic.prix = round(100 * moyenne_prix/rev_ucm, 1),
          indic.airbnb.nb_lgmt=round(100*Loc.actives/LOG, 1),
@@ -1144,8 +1158,6 @@ carteCommunesCorses_sf <- st_as_sf(carteCommunesCorses_merged)
 
 # Création d'une palette de couleurs pour les secteurs
 palSecteurs = colorFactor(palette = c("seagreen3", "orange2","blueviolet", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
-palSecteurs = colorFactor(palette = c("seagreen3", "blueviolet","orange2", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
-
 
 # Création d'une carte des communes avec un trait gris fin
 carteCommunes = leaflet(carteCommunesCorses_sf) %>%
@@ -1204,7 +1216,7 @@ Indicateurs_parCommune= Donnees_Logement %>%
          indic.lv = round(100 * LOGVAC / LOG, 1),
          indic.jeun = round(jeun / anc, 1),
          indic.social = round(100 * social / tot_lgmt, 1),
-         indic.prop = round(100 * proprietaire / RP_Filocom, 1),
+         indic.prop = round(100 * proprietaire / RP, 1),
          indic.duroc = duroc,
          indic.prix = round(100 * moyenne_prix/rev_ucm, 1),
          indic.airbnb.nb_lgmt=round(100*Loc.actives/LOG, 1),
@@ -1272,8 +1284,7 @@ carteCommunesCorses_sf <- st_as_sf(carteCommunesCorses_merged)
 
 # Création d'une palette de couleurs pour les secteurs
 palSecteurs = colorFactor(palette = c("seagreen3", "orange2","blueviolet", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
-palSecteurs = colorFactor(palette = c("blueviolet", "deeppink","seagreen3", "orange2"), domain = carteMaillesSecteurs$cl_maille4)
-
+palSecteurs = colorFactor(palette = c("deeppink", "blueviolet","seagreen3", "orange2"), domain = carteMaillesSecteurs$cl_maille4)
 
 
 # Création d'une carte des communes avec un trait gris fin
@@ -1328,7 +1339,7 @@ Indicateurs_parCommune= Donnees_Logement %>%
          indic.lv = round(100 * LOGVAC / LOG, 1),
          indic.jeun = round(jeun / anc, 1),
          indic.social = round(100 * social / tot_lgmt, 1),
-         indic.prop = round(100 * proprietaire / RP_Filocom, 1),
+         indic.prop = round(100 * proprietaire / RP, 1),
          indic.duroc = duroc,
          indic.prix = round(100 * moyenne_prix/rev_ucm, 1),
          indic.airbnb.nb_lgmt=round(100*Loc.actives/LOG, 1),
@@ -1398,8 +1409,7 @@ carteCommunesCorses_sf <- st_as_sf(carteCommunesCorses_merged)
 
 # Création d'une palette de couleurs pour les secteurs
 palSecteurs = colorFactor(palette = c("seagreen3", "orange2","blueviolet", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
-palSecteurs = colorFactor(palette = c("deeppink", "seagreen3","blueviolet", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
-
+palSecteurs = colorFactor(palette = c("orange2", "seagreen3","deeppink", "blueviolet"), domain = carteMaillesSecteurs$cl_maille4)
 
 # Création d'une carte des communes avec un trait gris fin
 carteCommunes = leaflet(carteCommunesCorses_sf) %>%
@@ -1453,7 +1463,7 @@ Indicateurs_parCommune= Donnees_Logement %>%
          indic.lv = round(100 * LOGVAC / LOG, 1),
          indic.jeun = round(jeun / anc, 1),
          indic.social = round(100 * social / tot_lgmt, 1),
-         indic.prop = round(100 * proprietaire / RP_Filocom, 1),
+         indic.prop = round(100 * proprietaire / RP, 1),
          indic.duroc = duroc,
          indic.prix = round(100 * moyenne_prix/rev_ucm, 1),
          indic.airbnb.nb_lgmt=round(100*Loc.actives/LOG, 1),
@@ -1747,17 +1757,6 @@ Donnees_Cube1=Donnees_Cube1 %>%
 Donnees_Cube1=Donnees_Cube1 %>% select(CODGEO,LIBGEO,tot_lgmt,jeun,anc, RP_Filocom=RP.y)
 
 
-
-Donnees_proprietaire=ImportFILOCOM_cube3  %>% 
-                    left_join(ImportINSEE,by="CODGEO") %>% 
-                    select(CODGEO, PO, totalRP,`Part des propriétaires dans les RP`)
-Donnees_proprietaire[, 2:ncol(Donnees_proprietaire)] <- Donnees_proprietaire[, 2:ncol(Donnees_proprietaire)] %>%  mutate_all(as.numeric)
-Donnees_proprietaire=Donnees_proprietaire %>% 
-                    mutate(proprietaire=ifelse(is.na(PO), `Part des propriétaires dans les RP`, PO)) %>% 
-                    select(CODGEO, proprietaire)
-
-
-
 Donnees_social=Donnees_Logement_2017  %>% 
               left_join(ImportFILOCOM_cube2,by="CODGEO") %>% 
               select(CODGEO, Parc_tot_HLM_SEM, social)
@@ -1784,7 +1783,7 @@ Donnees_AirDNA[, 2:ncol(Donnees_AirDNA)]=Donnees_AirDNA[, 2:ncol(Donnees_AirDNA)
 
 Donnees_INSEE=baseLogementINSEE_Corse_2019 %>% 
               left_join(basePopulationINSEE_Corse_2019, by="CODGEO") %>% 
-              select(CODGEO,POP=P19_POP,LOG=P19_LOG, RP=P19_RP, RSECOCC=P19_RSECOCC, LOGVAC=P19_LOGVAC,RP_PROP=P19_RP_PROP)
+              select(CODGEO,POP=P19_POP,LOG=P19_LOG, RP=P19_RP, RSECOCC=P19_RSECOCC, LOGVAC=P19_LOGVAC,RP_PROP=P19_RP_PROP,proprietaire=P19_RP_PROP)
 
 Donnees_DV3F= Import_DV3F %>% select(CODGEO, nb_mut=lgmt.nb_mut, moyenne_prix=lgmt.moy_prix_frais)
 
@@ -1793,7 +1792,6 @@ Donnees_rev_ucm = ImportFILOCOM_cube4b %>% select(CODGEO, rev_ucm=Total_menages_
 Donnees_Logement_MAJ=Donnees_Cube1 %>% 
   left_join(Donnees_DV3F,by="CODGEO")  %>% 
   left_join(Donnees_INSEE,by="CODGEO")  %>% 
-  left_join(Donnees_proprietaire,by="CODGEO") %>% 
   left_join(Donnees_social,by="CODGEO") %>% 
   left_join(Donnees_duroc,by="CODGEO") %>% 
   left_join(Donnees_rev_ucm,by="CODGEO") %>% 
