@@ -1,7 +1,7 @@
 ---
-title: "Rapport étude Maille Habitat avec MAJ des données"
+title: "Rapport étude Maille Habitat avec MAJ des données sans winsorisation"
 author: "Julien Luciani - AUE <br> julien.luciani@isula.corsica"
-date: "version du 16/11/2023"
+date: "version du 22/11/2023"
 output: 
   html_document:
     self_contained: false
@@ -14,7 +14,7 @@ output:
 knit: (function(inputFile, encoding) { 
   rmarkdown::render(inputFile,
                     encoding=encoding, 
-                    output_file='Rapport_Etude_Maille_Habitat_MAJ_Donnees.html') })
+                    output_file='Rapport_Etude_Maille_Habitat_MAJ_Donnees_sansWins.html') })
 ---
 
 ```{r setup, include=FALSE}
@@ -118,7 +118,6 @@ winsorisation= function (x, prob.min = 0.01, prob.max = .99){
   return(x)
 }
 listeIndicateurs=Indicateurs_parCommune %>% select(contains("indic")) %>% names()
-Indicateurs_parCommune[listeIndicateurs]=apply(Indicateurs_parCommune[listeIndicateurs],MARGIN = 2, FUN = winsorisation)
 Indicateurs_parCommune_valeurs=Indicateurs_parCommune[listeIndicateurs] 
 carteCommunesCorses_spdf=carteCommunesCorses %>% left_join(Indicateurs_parCommune,by="CODGEO")%>% select(CODGEO,LIBGEO,POP) %>%  as("Spatial")
 table_voisinage=poly2nb(carteCommunesCorses_spdf,queen=F)
@@ -158,7 +157,6 @@ Indicateurs_parMaille=Maillage %>%
 
 
 Indicateurs_parMaille_valeurs=Indicateurs_parMaille %>% select(contains("indic"))
-Indicateurs_parMaille_valeurs=Indicateurs_parMaille_valeurs %>% apply(MARGIN = 2, FUN = winsorisation)
 acp_parMailles=PCA(Indicateurs_parMaille_valeurs,ncp=5,graph=F)
 hc4 <- HCPC(acp_parMailles, nb.clust = 4, consol = T, graph = F)
 cl4 <- data.frame(maille = Indicateurs_parMaille$maille, cl_maille4 = hc4$data.clust[,"clust"])
@@ -170,8 +168,8 @@ carteCommunesCorses_sf <- st_as_sf(carteCommunesCorses_merged)
 
 
 
-Les précédents indicateurs (données de 2017) sont mis à jour avec des données plus récentes et de nouveaux indicateurs sont ajoutés.
-
+Les précédents indicateurs (données de 2017) sont mis à jour avec des données plus récentes et de nouveaux indicateurs sont ajoutés.  
+La winsorisation a été supprimée par rapport à la méthodologie de l'étude initiale.  
 
 <br>
 
@@ -783,7 +781,7 @@ webshot("Cartes_Interactives/carte_interactive_13.html", file = "Cartes_Interact
 # Resultats avec les données mises à jour
 
 <br>
-On conserve exactement la même méthodologie que dans l'étude initiale.  
+On conserve la même méthodologie que dans l'étude initiale en ne réalisant pas l'étape de winsorisation.    
 Dans la 1^ère^ simulation 1.1), on met seulement à jour les données.  
 Dans la 2^ème^ simulation 1.2) on ajoute en plus l'indicateur sur le revenu total des location de courte durée.  
 Dans la 3^ème^ simulation 1.3) on utilise l'indicateur de revenu moyen par logement des locations de coute durée (à la place du revenu total).  
@@ -836,7 +834,6 @@ winsorisation= function (x, prob.min = 0.01, prob.max = .99){
   return(x)
 }
 listeIndicateurs=Indicateurs_parCommune %>% select(contains("indic")) %>% names()
-Indicateurs_parCommune[listeIndicateurs]=apply(Indicateurs_parCommune[listeIndicateurs],MARGIN = 2, FUN = winsorisation)
 Indicateurs_parCommune_valeurs=Indicateurs_parCommune[listeIndicateurs] 
 carteCommunesCorses_spdf=carteCommunesCorses %>% left_join(Indicateurs_parCommune,by="CODGEO")%>% select(CODGEO,LIBGEO,POP) %>%  as("Spatial")
 table_voisinage=poly2nb(carteCommunesCorses_spdf,queen=F)
@@ -874,7 +871,6 @@ Indicateurs_parMaille=Maillage %>%
 
 
 Indicateurs_parMaille_valeurs=Indicateurs_parMaille %>% select(contains("indic"))
-Indicateurs_parMaille_valeurs=Indicateurs_parMaille_valeurs %>% apply(MARGIN = 2, FUN = winsorisation)
 acp_parMailles=PCA(Indicateurs_parMaille_valeurs,ncp=5,graph=F)
 hc4 <- HCPC(acp_parMailles, nb.clust = 4, consol = T, graph = F)
 cl4 <- data.frame(maille = Indicateurs_parMaille$maille, cl_maille4 = hc4$data.clust[,"clust"])
@@ -959,7 +955,6 @@ winsorisation= function (x, prob.min = 0.01, prob.max = .99){
   return(x)
 }
 listeIndicateurs=Indicateurs_parCommune %>% select(contains("indic")) %>% names()
-Indicateurs_parCommune[listeIndicateurs]=apply(Indicateurs_parCommune[listeIndicateurs],MARGIN = 2, FUN = winsorisation)
 Indicateurs_parCommune_valeurs=Indicateurs_parCommune[listeIndicateurs] 
 carteCommunesCorses_spdf=carteCommunesCorses %>% left_join(Indicateurs_parCommune,by="CODGEO")%>% select(CODGEO,LIBGEO,POP) %>%  as("Spatial")
 table_voisinage=poly2nb(carteCommunesCorses_spdf,queen=F)
@@ -998,7 +993,6 @@ Indicateurs_parMaille=Maillage %>%
 
 
 Indicateurs_parMaille_valeurs=Indicateurs_parMaille %>% select(contains("indic"))
-Indicateurs_parMaille_valeurs=Indicateurs_parMaille_valeurs %>% apply(MARGIN = 2, FUN = winsorisation)
 acp_parMailles=PCA(Indicateurs_parMaille_valeurs,ncp=5,graph=F)
 hc4 <- HCPC(acp_parMailles, nb.clust = 4, consol = T, graph = F)
 cl4 <- data.frame(maille = Indicateurs_parMaille$maille, cl_maille4 = hc4$data.clust[,"clust"])
@@ -1081,7 +1075,6 @@ winsorisation= function (x, prob.min = 0.01, prob.max = .99){
   return(x)
 }
 listeIndicateurs=Indicateurs_parCommune %>% select(contains("indic")) %>% names()
-Indicateurs_parCommune[listeIndicateurs]=apply(Indicateurs_parCommune[listeIndicateurs],MARGIN = 2, FUN = winsorisation)
 Indicateurs_parCommune_valeurs=Indicateurs_parCommune[listeIndicateurs] 
 carteCommunesCorses_spdf=carteCommunesCorses %>% left_join(Indicateurs_parCommune,by="CODGEO")%>% select(CODGEO,LIBGEO,POP) %>%  as("Spatial")
 table_voisinage=poly2nb(carteCommunesCorses_spdf,queen=F)
@@ -1120,7 +1113,6 @@ Indicateurs_parMaille=Maillage %>%
 
 
 Indicateurs_parMaille_valeurs=Indicateurs_parMaille %>% select(contains("indic"))
-Indicateurs_parMaille_valeurs=Indicateurs_parMaille_valeurs %>% apply(MARGIN = 2, FUN = winsorisation)
 acp_parMailles=PCA(Indicateurs_parMaille_valeurs,ncp=5,graph=F)
 hc4 <- HCPC(acp_parMailles, nb.clust = 4, consol = T, graph = F)
 cl4 <- data.frame(maille = Indicateurs_parMaille$maille, cl_maille4 = hc4$data.clust[,"clust"])
@@ -1207,7 +1199,6 @@ winsorisation= function (x, prob.min = 0.01, prob.max = .99){
   return(x)
 }
 listeIndicateurs=Indicateurs_parCommune %>% select(contains("indic")) %>% names()
-Indicateurs_parCommune[listeIndicateurs]=apply(Indicateurs_parCommune[listeIndicateurs],MARGIN = 2, FUN = winsorisation)
 Indicateurs_parCommune_valeurs=Indicateurs_parCommune[listeIndicateurs] 
 carteCommunesCorses_spdf=carteCommunesCorses %>% left_join(Indicateurs_parCommune,by="CODGEO")%>% select(CODGEO,LIBGEO,POP) %>%  as("Spatial")
 table_voisinage=poly2nb(carteCommunesCorses_spdf,queen=F)
@@ -1246,7 +1237,6 @@ Indicateurs_parMaille=Maillage %>%
 
 
 Indicateurs_parMaille_valeurs=Indicateurs_parMaille %>% select(contains("indic"))
-Indicateurs_parMaille_valeurs=Indicateurs_parMaille_valeurs %>% apply(MARGIN = 2, FUN = winsorisation)
 acp_parMailles=PCA(Indicateurs_parMaille_valeurs,ncp=5,graph=F)
 hc4 <- HCPC(acp_parMailles, nb.clust = 4, consol = T, graph = F)
 cl4 <- data.frame(maille = Indicateurs_parMaille$maille, cl_maille4 = hc4$data.clust[,"clust"])
@@ -1331,7 +1321,6 @@ winsorisation= function (x, prob.min = 0.01, prob.max = .99){
   return(x)
 }
 listeIndicateurs=Indicateurs_parCommune %>% select(contains("indic")) %>% names()
-Indicateurs_parCommune[listeIndicateurs]=apply(Indicateurs_parCommune[listeIndicateurs],MARGIN = 2, FUN = winsorisation)
 Indicateurs_parCommune_valeurs=Indicateurs_parCommune[listeIndicateurs] 
 carteCommunesCorses_spdf=carteCommunesCorses %>% left_join(Indicateurs_parCommune,by="CODGEO")%>% select(CODGEO,LIBGEO,POP) %>%  as("Spatial")
 table_voisinage=poly2nb(carteCommunesCorses_spdf,queen=F)
@@ -1371,7 +1360,6 @@ Indicateurs_parMaille=Maillage %>%
 
 
 Indicateurs_parMaille_valeurs=Indicateurs_parMaille %>% select(contains("indic"))
-Indicateurs_parMaille_valeurs=Indicateurs_parMaille_valeurs %>% apply(MARGIN = 2, FUN = winsorisation)
 acp_parMailles=PCA(Indicateurs_parMaille_valeurs,ncp=5,graph=F)
 hc4 <- HCPC(acp_parMailles, nb.clust = 4, consol = T, graph = F)
 cl4 <- data.frame(maille = Indicateurs_parMaille$maille, cl_maille4 = hc4$data.clust[,"clust"])
@@ -1455,7 +1443,6 @@ winsorisation= function (x, prob.min = 0.01, prob.max = .99){
   return(x)
 }
 listeIndicateurs=Indicateurs_parCommune %>% select(contains("indic")) %>% names()
-Indicateurs_parCommune[listeIndicateurs]=apply(Indicateurs_parCommune[listeIndicateurs],MARGIN = 2, FUN = winsorisation)
 Indicateurs_parCommune_valeurs=Indicateurs_parCommune[listeIndicateurs] 
 carteCommunesCorses_spdf=carteCommunesCorses %>% left_join(Indicateurs_parCommune,by="CODGEO")%>% select(CODGEO,LIBGEO,POP) %>%  as("Spatial")
 table_voisinage=poly2nb(carteCommunesCorses_spdf,queen=F)
@@ -1495,7 +1482,6 @@ Indicateurs_parMaille=Maillage %>%
 
 
 Indicateurs_parMaille_valeurs=Indicateurs_parMaille %>% select(contains("indic"))
-Indicateurs_parMaille_valeurs=Indicateurs_parMaille_valeurs %>% apply(MARGIN = 2, FUN = winsorisation)
 acp_parMailles=PCA(Indicateurs_parMaille_valeurs,ncp=5,graph=F)
 hc4 <- HCPC(acp_parMailles, nb.clust = 4, consol = T, graph = F)
 cl4 <- data.frame(maille = Indicateurs_parMaille$maille, cl_maille4 = hc4$data.clust[,"clust"])
@@ -1509,7 +1495,7 @@ carteCommunesCorses_sf <- st_as_sf(carteCommunesCorses_merged)
 # Création d'une palette de couleurs pour les secteurs
 palSecteurs = colorFactor(palette = c("seagreen3", "orange2","blueviolet", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
 palSecteurs = colorFactor(palette = c("deeppink", "blueviolet","seagreen3", "orange2"), domain = carteMaillesSecteurs$cl_maille4)
-
+palSecteurs = colorFactor(palette = c("seagreen3", "orange2","blueviolet", "deeppink"), domain = carteMaillesSecteurs$cl_maille4)
 
 
 # Création d'une carte des communes avec un trait gris fin
@@ -1597,7 +1583,6 @@ winsorisation= function (x, prob.min = 0.01, prob.max = .99){
   return(x)
 }
 listeIndicateurs=Indicateurs_parCommune %>% select(contains("indic")) %>% names()
-Indicateurs_parCommune[listeIndicateurs]=apply(Indicateurs_parCommune[listeIndicateurs],MARGIN = 2, FUN = winsorisation)
 Indicateurs_parCommune_valeurs=Indicateurs_parCommune[listeIndicateurs] 
 carteCommunesCorses_spdf=carteCommunesCorses %>% left_join(Indicateurs_parCommune,by="CODGEO")%>% select(CODGEO,LIBGEO,POP) %>%  as("Spatial")
 table_voisinage=poly2nb(carteCommunesCorses_spdf,queen=F)
@@ -1634,7 +1619,6 @@ Indicateurs_parMaille=Maillage %>%
 
 
 Indicateurs_parMaille_valeurs=Indicateurs_parMaille %>% select(contains("indic"))
-Indicateurs_parMaille_valeurs=Indicateurs_parMaille_valeurs %>% apply(MARGIN = 2, FUN = winsorisation)
 acp_parMailles=PCA(Indicateurs_parMaille_valeurs,ncp=5,graph=F)
 hc4 <- HCPC(acp_parMailles, nb.clust = 4, consol = T, graph = F)
 cl4 <- data.frame(maille = Indicateurs_parMaille$maille, cl_maille4 = hc4$data.clust[,"clust"])
