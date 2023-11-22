@@ -83,36 +83,6 @@ Script pour calculer les nouveaux indicateurs
 ```{r Calcul_indicateurs_MAJ, echo=F, eval=F}
 rm(list=ls())
 
-load("Données/Donnees_Logement_MAJ.Rdata")
-Donnees_Logement=Donnees_Logement_MAJ
-
-Import_carteCommunesCorses=st_read("Données/SHP_COMMUNES/COMMUNE.shp")
-carteCommunesCorses=Import_carteCommunesCorses %>% select(INSEE_COM,geometry)
-colnames(carteCommunesCorses)[1]="CODGEO"
-carteCommunesCorses=carteCommunesCorses %>% arrange(CODGEO)
-carteCommunesCorses <- st_transform(carteCommunesCorses, crs = 4326)
-
-Indicateurs_parCommune= Donnees_Logement %>% 
-  mutate(indic.transac = round(100 * nb_mut / LOG, 1),
-         indic.menag = round(POP/RP, 1),
-         indic.rs = round(100 * RSECOCC / LOG, 1),
-         indic.lv = round(100 * LOGVAC / LOG, 1),
-         indic.jeun = round(jeun / anc, 1),
-         indic.social = round(100 * social / tot_lgmt, 1),
-         indic.prop = round(100 * proprietaire / RP, 1),
-         indic.duroc = duroc,
-         indic.prix = round(100 * moyenne_prix/rev_ucm, 1),
-         indic.airbnb.nb_lgmt=round(100*Loc.actives/LOG, 1),
-         indic.airbnb.revTot_annee=rev.LTM_tot,
-         indic.airbnb.revMoy_lgt=rev.LTM_moy_lgt,
-         indic.log=LOG) %>% 
-  select(CODGEO,LIBGEO,POP,LOG,contains("indic"))
-Indicateurs_parCommune=Indicateurs_parCommune %>% mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
-
-
-
-rm(list=ls())
-
 nb_mailles=36
 population_min=2500
 
@@ -140,7 +110,6 @@ Indicateurs_parCommune= Donnees_Logement %>%
          indic.log=LOG) %>% 
   select(CODGEO,LIBGEO,POP,LOG,contains("indic"))
 Indicateurs_parCommune=Indicateurs_parCommune %>% mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
-
 
 winsorisation= function (x, prob.min = 0.01, prob.max = .99){
   a <- quantile(x, probs = c(prob.min, prob.max))
@@ -180,7 +149,10 @@ Indicateurs_parMaille=Maillage %>%
          indic.prop = round(100 * proprietaire / tot_lgmt, 1),
          indic.duroc = duroc,
          indic.prix = round(100 * moyenne_prix/rev_ucm, 1),
-         indic.airbnb=round(100*Loc.actives/LOG, 1)) %>% 
+         indic.airbnb.nb_lgmt=round(100*Loc.actives/LOG, 1),
+         indic.airbnb.revTot_annee=rev.LTM_tot,
+         indic.airbnb.revMoy_lgt=rev.LTM_moy_lgt,
+         indic.log=LOG) %>%  
   select(maille,POP,LOG,contains("indic")) %>% 
   mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
@@ -811,6 +783,15 @@ webshot("Cartes_Interactives/carte_interactive_13.html", file = "Cartes_Interact
 # Resultats avec les données mises à jour
 
 <br>
+On conserve exactement la même méthodologie que dans l'étude initiale.  
+Dans la 1^ère^ simulation 1.1), on met seulement à jour les données.  
+Dans la 2^ème^ simulation 1.2) on ajoute en plus l'indicateur sur le revenu total des location de courte durée.  
+Dans la 3^ème^ simulation 1.3) on utilise l'indicateur de revenu moyen par logement des locations de coute durée (à la place du revenu total).  
+<br>
+Les 3 simulations suivantes sont les mêmes en ajoutant en plus le nombre de logements dans la liste des indicateurs.  
+
+<br>
+
 
 ## 1) Sans l'indicateur "nombre de logements"
 
