@@ -1,7 +1,7 @@
 ---
 title: "Rapport étude Maille Habitat avec MAJ des données"
-author: "Julien Luciani"
-date: "16/11/2023"
+author: "Julien Luciani - AUE <br> julien.luciani@isula.corsica"
+date: "version du 16/11/2023"
 output: 
   html_document:
     self_contained: false
@@ -198,7 +198,7 @@ carteCommunesCorses_sf <- st_as_sf(carteCommunesCorses_merged)
 
 
 
-Les précédents indicateurs sont mis à jour avec des données plus récentes et de nouveaux indicateurs sont ajoutés.
+Les précédents indicateurs (données de 2017) sont mis à jour avec des données plus récentes et de nouveaux indicateurs sont ajoutés.
 
 
 <br>
@@ -493,12 +493,6 @@ Ainsi, il a été choisi de construire ce nouvel indicateur à partir du recense
 </strong>
 </span>
 
-
-<span style="color:red">
-<strong>
-Cette donnée est également présente dans le recensement INSEE sans secrétisation. Il peut être pertinent d'utiliser cette source.
-</strong>
-</span>
 
 
 ```{r, incude=F, echo=F, eval=F}
